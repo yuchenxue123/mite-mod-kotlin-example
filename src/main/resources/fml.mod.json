@@ -1,19 +1,19 @@
 {
 	"schemaVersion": 1,
-	"id": "example",
+	"id": "${id}",
+	"name": "${name}",
 	"version": "${version}",
+	"description": "${description}",
+	"authors": ["yuchenxue"],
 	"depends": {
 		"fishmodloader": ">=3.2.1"
 	},
 	"environment": "*",
-	"name": "ExampleMod",
-	"description": "",
-	"authors": ["yuchenxue"],
 	"entrypoints": {
 		"main": ["cute.neko.example.ExampleMod"]
 	},
 	"mixins": [
 		"neko.mixins.json"
 	],
-	"accessWidener": "neko.accesswidener"
+	"accessWidener": "${widener}"
 }
