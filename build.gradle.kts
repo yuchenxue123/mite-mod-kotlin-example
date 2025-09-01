@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
+
 plugins {
     kotlin("jvm")
     id("fml-loom")
@@ -24,7 +26,7 @@ val access_widener: String by project
 loom {
     accessWidenerPath = file("src/main/resources/$access_widener")
     mergedMinecraftJar()
-    fml = File("libs/loader-v3.4.1.jar")
+    fml = File("libs/loader-v3.4.2.jar")
 
     mods {
         create(mod_name) {
@@ -39,6 +41,10 @@ val packageImplementation = configurations.register("packageImplementation") {
 
 fun DependencyHandler.packageImplementation(dependencyNotation: Any) {
     add("packageImplementation", dependencyNotation)
+}
+
+fun DependencyHandler.packageImplementation(dependencyNotation: Any, dependencyConfiguration: Action<ExternalModuleDependency>) {
+    addDependencyTo(this,"packageImplementation", dependencyNotation, dependencyConfiguration)
 }
 
 val minecraft_version: String by project
