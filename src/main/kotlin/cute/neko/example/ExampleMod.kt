@@ -9,6 +9,6 @@ import net.fabricmc.api.ModInitializer
 
 class ExampleMod : ModInitializer {
     override fun onInitialize() {
-        println("This is a toooooooooooooooooooooooooo looooooooooooooooooooooooooooooooooong print")
+        println("This is a looooooooooooooooooooooooooooooooooong print for mod init!")
     }
 }

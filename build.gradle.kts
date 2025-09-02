@@ -5,8 +5,16 @@ plugins {
     id("fml-loom")
 }
 
+// Mod Info
 val mod_name: String by project
+val mod_id: String by project
 val mod_version: String by project
+val mod_description: String by project
+// Loader
+val loader_version: String by project
+val minecraft_version: String by project
+// Dependencies
+val kotlin_version: String by project
 
 version = mod_version
 
@@ -26,7 +34,7 @@ val access_widener: String by project
 loom {
     accessWidenerPath = file("src/main/resources/$access_widener")
     mergedMinecraftJar()
-    fml = File("libs/loader-v3.4.2.jar")
+    fml = File("libs/loader-$loader_version.jar")
 
     mods {
         create(mod_name) {
@@ -47,19 +55,13 @@ fun DependencyHandler.packageImplementation(dependencyNotation: Any, dependencyC
     addDependencyTo(this,"packageImplementation", dependencyNotation, dependencyConfiguration)
 }
 
-val minecraft_version: String by project
-val kotlin_version: String by project
-
 dependencies {
     minecraft("com.mojang:minecraft:$minecraft_version")
     mappings(loom.fmlMCPMappings())
     implementation(files(loom.fml.toPath()))
 
-    packageImplementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 }
-
-val mod_id: String by project
-val mod_description: String by project
 
 val properties = mapOf(
     "id" to mod_id,
@@ -78,13 +80,19 @@ tasks.processResources {
 }
 
 tasks.jar {
-
     from({
         packageImplementation.get().map {
             if (it.isDirectory) it else zipTree(it)
         }
     }) {
-        exclude("META-INF/")
+        exclude("META-INF/maven/**")
+        exclude("META-INF/versions/**")
+
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    from(arrayOf("LICENSE.txt", "NOTICE.txt")) {
+        into("META-INF/")
     }
 }
 

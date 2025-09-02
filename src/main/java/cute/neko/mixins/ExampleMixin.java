@@ -16,6 +16,6 @@ public class ExampleMixin {
 
     @Inject(method = "startGame", at = @At(value = "HEAD"))
     public void startGame(CallbackInfo ci) {
-        // pppppppppppppppppppppppppppppppp
+        System.out.println("This is a looooooooooooooooooooooooooooooong print for mixin!");
     }
 }
