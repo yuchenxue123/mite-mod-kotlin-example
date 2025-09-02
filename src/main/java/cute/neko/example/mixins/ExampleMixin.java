@@ -1,4 +1,4 @@
-package cute.neko.mixins;
+package cute.neko.example.mixins;
 
 import net.minecraft.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
