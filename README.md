@@ -6,6 +6,6 @@
 
 [Fish Kotlin Language](https://github.com/yuchenxue123/fish-kotlin-language)
 
-### 关于 fml-loom
+### 关于 Modded Mite
 
-[下载与教程](https://minecraftistooeasy.github.io/pages/docs/environment-fml3.html)
+[Github组织](https://github.com/MinecraftIsTooEasy)

@@ -8,6 +8,11 @@ pluginManagement {
             name = "Fabric"
             url = uri("https://maven.fabricmc.net/")
         }
+
+        maven {
+            name = "Project"
+            url = uri("file://${rootDir}/repo")
+        }
     }
 
     plugins {
