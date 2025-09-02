@@ -8,7 +8,8 @@
     "yuchenxue"
   ],
   "depends": {
-    "fishmodloader": ">=3.2.1"
+    "fishmodloader": ">=3.4.1",
+    "kotlin-language": ">=1.0.1"
   },
   "environment": "*",
   "entrypoints": {
