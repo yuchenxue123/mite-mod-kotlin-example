@@ -14,7 +14,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "cute.neko.example.ExampleMod"
+      {
+        "adapter": "kotlin",
+        "value": "cute.neko.example.ExampleMod"
+      }
     ]
   },
   "mixins": [

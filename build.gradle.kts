@@ -34,7 +34,7 @@ val access_widener: String by project
 loom {
     accessWidenerPath = file("src/main/resources/$access_widener")
     mergedMinecraftJar()
-    fml = File("libs/loader-$loader_version.jar")
+    fml = File("loader/loader-$loader_version.jar")
 
     mods {
         create(mod_name) {
@@ -61,6 +61,8 @@ dependencies {
     implementation(files(loom.fml.toPath()))
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+
+    implementation(fileTree("libs"))
 }
 
 val properties = mapOf(
