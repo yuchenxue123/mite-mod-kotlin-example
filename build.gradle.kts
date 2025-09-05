@@ -1,7 +1,6 @@
 import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import java.util.Properties
 import kotlin.apply
-import kotlin.collections.getValue
 
 plugins {
     kotlin("jvm")
@@ -125,7 +124,10 @@ kotlin {
 // publish to gitlab, you can delete this.
 
 val config = Properties().apply {
-    file("config.properties").inputStream().use { load(it) }
+    val file = file("config.properties")
+    if (file.exists()) {
+        file.inputStream().use { load(it) }
+    }
 }
 
 val maven_name: String by project
@@ -146,7 +148,7 @@ publishing {
         maven {
             url = uri("https://gitlab.com/api/v4/projects/74192719/packages/maven")
 
-            val private_token: String by config
+            val private_token: String = config.getProperty("private_token") ?: ""
 
             credentials(HttpHeaderCredentials::class) {
                 name = "Private-Token"
