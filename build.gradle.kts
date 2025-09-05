@@ -1,8 +1,12 @@
 import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
+import java.util.Properties
+import kotlin.apply
+import kotlin.collections.getValue
 
 plugins {
     kotlin("jvm")
     id("fml-loom")
+    id("maven-publish")
 }
 
 // Mod Info
@@ -26,6 +30,10 @@ repositories {
     maven {
         name = "Jitpack"
         url = uri("https://jitpack.io")
+    }
+
+    maven {
+        url = uri("https://gitlab.com/api/v4/projects/74192719/packages/maven")
     }
 }
 
@@ -62,7 +70,7 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
-    implementation(fileTree("libs"))
+    implementation("cute.neko.mite:kawakaze-lib:1.1")
 }
 
 val properties = mapOf(
@@ -111,6 +119,44 @@ java {
 kotlin {
     compilerOptions {
         jvmToolchain(17)
+    }
+}
+
+// publish to gitlab, you can delete this.
+
+val config = Properties().apply {
+    file("config.properties").inputStream().use { load(it) }
+}
+
+val maven_name: String by project
+val maven_group: String by project
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+
+            groupId = maven_group
+            artifactId = maven_name
+            version = mod_version
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("https://gitlab.com/api/v4/projects/74192719/packages/maven")
+
+            val private_token: String by config
+
+            credentials(HttpHeaderCredentials::class) {
+                name = "Private-Token"
+                value = private_token
+            }
+
+            authentication {
+                create<HttpHeaderAuthentication>("header")
+            }
+        }
     }
 }
 
