@@ -69,7 +69,7 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
-    implementation("cute.neko.mite:kawakaze-lib:1.1")
+    implementation("cute.neko.mite:kawakaze-lib:1.1.1")
 }
 
 val properties = mapOf(
