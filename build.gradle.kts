@@ -1,28 +1,25 @@
-import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
-import java.util.Properties
-import kotlin.apply
+import Information.access_widener
+import Information.maven_group
+import Information.maven_name
+import Information.mod_description
+import Information.mod_id
+import Information.mod_name
+import Information.mod_version
+import Versions.loader_version
+import Versions.minecraft_version
+import java.util.*
 
 plugins {
-    kotlin("jvm")
-    id("fml-loom")
+    `kotlin-jvm`
+    `fml-loom`
     id("maven-publish")
+    id("lite")
 }
-
-// Mod Info
-val mod_name: String by project
-val mod_id: String by project
-val mod_version: String by project
-val mod_description: String by project
-// Loader
-val loader_version: String by project
-val minecraft_version: String by project
-// Dependencies
-val kotlin_version: String by project
 
 version = mod_version
 
 base {
-    archivesName = mod_name
+    archivesName = mod_name.lowercase()
 }
 
 repositories {
@@ -36,8 +33,6 @@ repositories {
     }
 }
 
-val access_widener: String by project
-
 loom {
     accessWidenerPath = file("src/main/resources/$access_widener")
     mergedMinecraftJar()
@@ -50,26 +45,13 @@ loom {
     }
 }
 
-val packageImplementation = configurations.register("packageImplementation") {
-    configurations.implementation.get().extendsFrom(this)
-}
-
-fun DependencyHandler.packageImplementation(dependencyNotation: Any) {
-    add("packageImplementation", dependencyNotation)
-}
-
-fun DependencyHandler.packageImplementation(dependencyNotation: Any, dependencyConfiguration: Action<ExternalModuleDependency>) {
-    addDependencyTo(this,"packageImplementation", dependencyNotation, dependencyConfiguration)
-}
-
 dependencies {
-    minecraft("com.mojang:minecraft:$minecraft_version")
+    minecraft("com.mojang:minecraft:${minecraft_version}")
     mappings(loom.fmlMCPMappings())
     implementation(files(loom.fml.toPath()))
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
-
-    implementation("cute.neko.mite:kawakaze-lib:1.1.1")
+    implementation(`kotlin-stdlib`)
+    implementation(`kawakaze-lib`)
 }
 
 val properties = mapOf(
@@ -90,7 +72,7 @@ tasks.processResources {
 
 tasks.jar {
     from({
-        packageImplementation.get().map {
+        configurations.packageImplementation.get().map {
             if (it.isDirectory) it else zipTree(it)
         }
     }) {
@@ -129,9 +111,6 @@ val config = Properties().apply {
         file.inputStream().use { load(it) }
     }
 }
-
-val maven_name: String by project
-val maven_group: String by project
 
 publishing {
     publications {

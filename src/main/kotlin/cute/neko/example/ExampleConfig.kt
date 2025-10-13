@@ -2,6 +2,7 @@ package cute.neko.example
 
 import cute.neko.kawakaze.config.Config
 
+@Suppress("unused")
 object ExampleConfig : Config("example", ExampleMod.MOD_ID) {
 
     val example_boolean = setting("Fly", false)
