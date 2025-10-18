@@ -44,7 +44,7 @@ dependencies {
     mappings(loom.fmlMCPMappings())
     implementation(files(loom.fml.toPath()))
 
-    implementation(Libraries.kotlin_stdlib)
+    implementation(Libraries.kotlin_language)
     implementation(Libraries.kawakaze_lib)
 }
 
