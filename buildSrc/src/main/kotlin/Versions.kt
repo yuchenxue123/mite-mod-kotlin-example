@@ -14,4 +14,5 @@ object Versions {
 
     // kawakaze lib version
     const val kawakaze_version = "1.1.1"
+
 }

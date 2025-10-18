@@ -12,8 +12,8 @@ import java.util.*
 plugins {
     `kotlin-jvm`
     `fml-loom`
+    `package-plugin`
     id("maven-publish")
-    id("lite")
 }
 
 version = mod_version
@@ -23,14 +23,8 @@ base {
 }
 
 repositories {
-    maven {
-        name = "Jitpack"
-        url = uri("https://jitpack.io")
-    }
-
-    maven {
-        url = uri("https://gitlab.com/api/v4/projects/74192719/packages/maven")
-    }
+    jetpack()
+    mite()
 }
 
 loom {
@@ -50,8 +44,8 @@ dependencies {
     mappings(loom.fmlMCPMappings())
     implementation(files(loom.fml.toPath()))
 
-    implementation(`kotlin-stdlib`)
-    implementation(`kawakaze-lib`)
+    implementation(Libraries.kotlin_stdlib)
+    implementation(Libraries.kawakaze_lib)
 }
 
 val properties = mapOf(

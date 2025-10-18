@@ -13,9 +13,9 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("lite") {
-            id = "lite"
-            implementationClass = "LitePlugin"
+        register("package-plugin") {
+            id = "package-plugin"
+            implementationClass = "PackagePlugin"
         }
     }
 

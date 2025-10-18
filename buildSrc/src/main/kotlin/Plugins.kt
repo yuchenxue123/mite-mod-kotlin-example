@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("ObjectPropertyName")
 
 import Versions.kotlin_version
 import Versions.loom_version
@@ -10,4 +10,8 @@ val PluginDependenciesSpec.`kotlin-jvm`: PluginDependencySpec
 
 val PluginDependenciesSpec.`fml-loom`: PluginDependencySpec
     get() = id("fml-loom").version(loom_version)
+
+val PluginDependenciesSpec.`package-plugin`: PluginDependencySpec
+    get() = id("package-plugin")
+
 
