@@ -10,9 +10,9 @@ import Versions.minecraft_version
 import java.util.*
 
 plugins {
-    `kotlin-jvm`
-    `fml-loom`
-    `package-plugin`
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.fml)
+    alias(libs.plugins.quick)
     id("maven-publish")
 }
 
@@ -46,6 +46,8 @@ dependencies {
 
     implementation(Libraries.kotlin_language)
     implementation(Libraries.kawakaze_lib)
+
+//    pkg(kotlin("stdlib"))
 }
 
 val properties = mapOf(
@@ -61,23 +63,6 @@ tasks.processResources {
 
     filesMatching("fml.mod.json") {
         expand(properties)
-    }
-}
-
-tasks.jar {
-    from({
-        configurations.packageImplementation.get().map {
-            if (it.isDirectory) it else zipTree(it)
-        }
-    }) {
-        exclude("META-INF/maven/**")
-        exclude("META-INF/versions/**")
-
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    }
-
-    from(arrayOf("LICENSE.txt", "NOTICE.txt")) {
-        into("META-INF/")
     }
 }
 
@@ -98,7 +83,6 @@ kotlin {
 }
 
 // publish to gitlab, you can delete this.
-
 val config = Properties().apply {
     val file = file("config.properties")
     if (file.exists()) {

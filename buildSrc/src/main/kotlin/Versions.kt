@@ -3,9 +3,6 @@ object Versions {
     // kotlin version
     const val kotlin_version = "2.2.0"
 
-    // fish loom version
-    const val loom_version = "1.4.5"
-
     // minecraft version
     const val minecraft_version = "1.6.4-MITE"
 
