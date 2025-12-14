@@ -11,17 +11,17 @@ object ExampleRecipePrepare : RecipePreparable() {
             .output(ItemStack(Item.swordAdamantium))
             .input(ItemStack(Item.stick, 2))
             .withLowestCrafting()
-            .build()
+            .build() // 用两个木棍合成艾德曼剑
             .delegate()
             .output(ItemStack(Item.swordIron))
             .input(ItemStack(Item.stick))
             .withLowestCrafting()
-            .build()
+            .build() // 用一个木棍合成铁剑
             .delegate()
             .output(ItemStack(Item.diamond))
             .input(ItemStack(Item.stick, 3))
             .withLowestCrafting()
-            .build()
+            .build() // 用三个木棍合成钻石
             .delegate()
     }
 }
