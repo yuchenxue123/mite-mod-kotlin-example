@@ -1,12 +1,3 @@
-import Information.access_widener
-import Information.maven_group
-import Information.maven_name
-import Information.mod_description
-import Information.mod_id
-import Information.mod_name
-import Information.mod_version
-import Versions.loader_version
-import Versions.minecraft_version
 import java.util.*
 
 plugins {
@@ -16,21 +7,30 @@ plugins {
     id("maven-publish")
 }
 
-version = mod_version
+val mod_name: String by project
+val mod_version: String by project
+val mod_id: String by project
+val mod_description: String by project
+val access_widener: String by project
+
+val maven_group: String by project
+val maven_name: String by project
+
+version = property("mod_version").toString()
 
 base {
     archivesName = mod_name.lowercase()
 }
 
 repositories {
-    jetpack()
-    mite()
+    maven("https://jitpack.io")
+    maven("https://gitlab.com/api/v4/projects/74192719/packages/maven")
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/$access_widener")
+    accessWidenerPath = file("src/main/resources/${property("access_widener")}")
     mergedMinecraftJar()
-    fml = File("loader/loader-$loader_version.jar")
+    fml = File("loader/loader-3.4.2.jar")
 
     mods {
         create(mod_name) {
@@ -40,14 +40,12 @@ loom {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${minecraft_version}")
+    minecraft("com.mojang:minecraft:1.6.4-MITE")
     mappings(loom.fmlMCPMappings())
     implementation(files(loom.fml.toPath()))
 
-    implementation(Libraries.kotlin_language)
-    implementation(Libraries.kawakaze_lib)
-
-//    pkg(kotlin("stdlib"))
+    implementation(libs.kotlinLanguage)
+    implementation(libs.kawakazeLib)
 }
 
 val properties = mapOf(
