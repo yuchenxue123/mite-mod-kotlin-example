@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "${id}",
-  "name": "${name}",
+  "id": "example",
+  "name": "Example Mod",
   "version": "${version}",
-  "description": "${description}",
+  "description": "An example mod with kotlin.",
   "authors": [
     "yuchenxue"
   ],
@@ -17,12 +17,12 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "cute.neko.example.ExampleMod"
+        "value": "com.example.ExampleMod"
       }
     ]
   },
   "mixins": [
     "example.mixins.json"
   ],
-  "accessWidener": "${widener}"
+  "accessWidener": "example.accesswidener"
 }

@@ -1,25 +1,19 @@
-import java.util.*
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.fml)
-    alias(libs.plugins.quick)
     id("maven-publish")
 }
 
 val mod_name: String by project
 val mod_version: String by project
 val mod_id: String by project
-val mod_description: String by project
-val access_widener: String by project
-
 val maven_group: String by project
-val maven_name: String by project
 
-version = property("mod_version").toString()
+group = maven_group
+version = mod_version
 
 base {
-    archivesName = mod_name.lowercase()
+    archivesName = mod_id
 }
 
 repositories {
@@ -27,8 +21,9 @@ repositories {
     maven("https://gitlab.com/api/v4/projects/74192719/packages/maven")
 }
 
+
 loom {
-    accessWidenerPath = file("src/main/resources/${property("access_widener")}")
+    accessWidenerPath = file("src/main/resources/example.accesswidener")
     mergedMinecraftJar()
     fml = File("loader/loader-3.4.2.jar")
 
@@ -40,7 +35,7 @@ loom {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.6.4-MITE")
+    minecraft("Minecraft:IsTooEasy:1.6.4-MITE")
     mappings(loom.fmlMCPMappings())
     implementation(files(loom.fml.toPath()))
 
@@ -48,19 +43,11 @@ dependencies {
     implementation(libs.kawakazeLib)
 }
 
-val properties = mapOf(
-    "id" to mod_id,
-    "name" to mod_name,
-    "version" to mod_version,
-    "description" to mod_description,
-    "widener" to access_widener
-)
-
 tasks.processResources {
     inputs.property("version", mod_version)
 
     filesMatching("fml.mod.json") {
-        expand(properties)
+        expand("version" to mod_version)
     }
 }
 
@@ -76,40 +63,10 @@ kotlin {
     }
 }
 
-// publish to gitlab, you can delete this.
-val config = Properties().apply {
-    val file = file("config.properties")
-    if (file.exists()) {
-        file.inputStream().use { load(it) }
-    }
-}
-
 publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-
-            groupId = maven_group
-            artifactId = maven_name
-            version = mod_version
-        }
-    }
-
-    repositories {
-        maven {
-            url = uri("https://gitlab.com/api/v4/projects/74192719/packages/maven")
-
-            val private_token: String = config.getProperty("private_token") ?: ""
-
-            credentials(HttpHeaderCredentials::class) {
-                name = "Private-Token"
-                value = private_token
-            }
-
-            authentication {
-                create<HttpHeaderAuthentication>("header")
-            }
         }
     }
 }
-
