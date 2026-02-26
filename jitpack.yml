@@ -1,5 +1,5 @@
 jdk:
   - openjdk17
 
-before-install:
+before_install:
   - ./prepare.sh
