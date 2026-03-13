@@ -1,5 +1,6 @@
 package com.example
 
+/*
 import cute.neko.kawakaze.config.ConfigRegistrar
 import cute.neko.kawakaze.prepare.types.ConfigPreparable
 
@@ -8,3 +9,4 @@ object ExampleConfigPrepare : ConfigPreparable() {
         registrar.register(ExampleConfig)
     }
 }
+*/

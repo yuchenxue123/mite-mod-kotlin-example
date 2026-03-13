@@ -9,8 +9,7 @@
   ],
   "depends": {
     "fishmodloader": ">=3.4.1",
-    "kotlin-language": ">=1.0.1",
-    "kawakazelib": ">=1.0"
+    "fish-language-kotlin": ">=1.1.4.2310"
   },
   "environment": "*",
   "entrypoints": {

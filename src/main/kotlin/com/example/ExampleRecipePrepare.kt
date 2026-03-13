@@ -1,5 +1,6 @@
 package com.example
 
+/*
 import cute.neko.kawakaze.prepare.types.RecipePreparable
 import cute.neko.kawakaze.registry.recipe.builder.RecipeBuilder
 import net.minecraft.Item
@@ -25,3 +26,4 @@ object ExampleRecipePrepare : RecipePreparable() {
             .delegate()
     }
 }
+*/

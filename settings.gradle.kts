@@ -3,16 +3,9 @@ pluginManagement {
         mavenLocal()
         gradlePluginPortal()
         mavenCentral()
-
-        maven {
-            name = "Fabric"
-            url = uri("https://maven.fabricmc.net/")
-        }
-
-        maven {
-            url = uri("https://gitlab.com/mite-mod/repo/raw/main/maven")
-        }
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.limingzxc.top/repository/maven-public/")
     }
 }
 
-rootProject.name = "example"
+rootProject.name = "mite-kotlin-example"

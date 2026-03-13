@@ -1,11 +1,11 @@
 [versions]
-kotlin = "2.2.20"
+kotlin = "2.3.10"
 coroutines = "1.10.2"
 detekt = "1.23.8"
 quick = "0.1"
 
-fml = "1.4.5"
-kotlin_language = "1.0.1"
+fml = "0.1"
+fish-kotlin = "1.1.4.2310"
 kawakaze = "1.1.1"
 
 
@@ -23,7 +23,7 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 # mods
-kotlinLanguage = { group = "cute.neko.mite", name = "kotlin-language", version.ref = "kotlin_language" }
+kotlinLanguage = { group = "com.github.yuchenxue123", name = "fish-kotlin-language", version.ref = "fish-kotlin" }
 kawakazeLib = { group = "cute.neko.mite", name ="kawakaze-lib", version.ref = "kawakaze" }
 
 [bundles]
